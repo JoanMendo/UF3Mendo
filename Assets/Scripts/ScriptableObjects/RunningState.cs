@@ -9,18 +9,22 @@ public class RunningState : StatesSO
 {
     public override void EnterState(PlayerInputData playerData)
     {
-        playerData.characterAnimator.SetBool("isMoving", true);
+        playerData.characterAnimator.Play("Walking_Slow");
     }
 
     public override void ExitState(PlayerInputData playerData)
     {
-        playerData.characterAnimator.SetBool("isMoving", false);
+
     }
 
     public override void UpdateState(PlayerInputData playerData)
     {
         //Comprovaciones para cambiar estado
-        if (playerData.MoveInput == Vector2.zero)
+        if (playerData.lastTimeJumping < Time.time + 0.2f)
+        {
+            playerData.playerController.ChangeState(playerData.playerController.jumpingState);
+        }
+        else if (playerData.MoveInput == Vector2.zero)
         {
             playerData.playerController.ChangeState(playerData.playerController.idleState);
         }

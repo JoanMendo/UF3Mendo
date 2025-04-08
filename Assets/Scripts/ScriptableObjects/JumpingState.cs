@@ -9,16 +9,25 @@ public class JumpingState : StatesSO
 {
     public override void EnterState(PlayerInputData playerData)
     {
-        throw new System.NotImplementedException();
+        playerData.characterAnimator.Play("Jump_Start");
     }
 
     public override void ExitState(PlayerInputData playerData)
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void UpdateState(PlayerInputData playerData)
     {
-        throw new System.NotImplementedException();
+
+        //Si la animacion actual ha terminado, ejecuta otra
+        if (playerData.characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump_End") && playerData.lastTimeJumping > Time.time + 0.5f)
+        {
+            playerData.characterAnimator.Play("Idle");
+            playerData.playerController.ChangeState(playerData.playerController.runningState);
+        }
+
+
+            
     }
 }
