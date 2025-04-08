@@ -21,7 +21,7 @@ public class IdleState : StatesSO
     {
 
         //Comprovaciones para cambiar estado
-        if (playerData.lastTimeJumping < Time.time + 0.2f)
+        if ( Time.time < 0.2f + playerData.lastTimeJumping && playerData.lastTimeJumping != 0f)
         {
             playerData.playerController.ChangeState(playerData.playerController.jumpingState);
         }
