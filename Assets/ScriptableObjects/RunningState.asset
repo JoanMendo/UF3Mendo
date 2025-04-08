@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2512a04430caf489ef3c1f74d12be3, type: 3}
   m_Name: RunningState
   m_EditorClassIdentifier: 
-  transitions: []
+  transitions:
+  - targetState: {fileID: 11400000, guid: 528709bf8f1ec4e44822ca5dde9e0a81, type: 2}
+    hasPriority: 1

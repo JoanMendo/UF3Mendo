@@ -7,18 +7,24 @@ using UnityEngine.InputSystem;
 
 public class IdleState : StatesSO
 {
-    public override void EnterState(PlayerController player)
+    public override void EnterState(PlayerInputData playerData)
     {
-        throw new System.NotImplementedException();
+        playerData.characterAnimator.SetBool("isIdle", true);
     }
 
-    public override void ExitState(PlayerController player)
+    public override void ExitState(PlayerInputData playerData)
     {
-        throw new System.NotImplementedException();
+        playerData.characterAnimator.SetBool("isIdle", false);
     }
 
-    public override void UpdateState(PlayerController player)
+    public override void UpdateState(PlayerInputData playerData)
     {
-        throw new System.NotImplementedException();
+
+        //Comprovaciones para cambiar estado
+        if (playerData.MoveInput != Vector2.zero)
+        {
+            
+            playerData.playerController.ChangeState(playerData.playerController.runningState);
+        }
     }
 }

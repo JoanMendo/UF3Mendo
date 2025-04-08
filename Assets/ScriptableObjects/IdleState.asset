@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: IdleState
   m_EditorClassIdentifier: 
   transitions:
-  - targetState: {fileID: 0}
-    hasExitTime: 0
+  - targetState: {fileID: 11400000, guid: f1e6c930394deb945a569526175b7fa5, type: 2}
+    hasPriority: 1

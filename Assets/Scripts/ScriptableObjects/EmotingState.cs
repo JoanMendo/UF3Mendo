@@ -7,17 +7,17 @@ using UnityEngine.InputSystem;
 
 public class Emoting : StatesSO
 {
-    public override void EnterState(PlayerController player)
+    public override void EnterState(PlayerInputData playerData)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void ExitState(PlayerController player)
+    public override void ExitState(PlayerInputData playerData)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void UpdateState(PlayerController player)
+    public override void UpdateState(PlayerInputData playerData)
     {
         throw new System.NotImplementedException();
     }

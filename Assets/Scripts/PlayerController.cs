@@ -1,25 +1,64 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
    
+    [SerializeField] private StatesSO currentState;
+    public PlayerInputData playerInputData = new PlayerInputData();
 
-    
+    [Header("States")]
+    [SerializeField] public StatesSO idleState;
+    [SerializeField] public StatesSO runningState;
+    [SerializeField] public StatesSO jumpingState;
+    [SerializeField] public StatesSO dodgingState;
+    [SerializeField] public StatesSO dyingState;
 
-    private PlayerInputData playerInputData = new PlayerInputData();
-    void Start()
+
+    public void Awake()
     {
-        
+
+        playerInputData.characterController = GetComponent<CharacterController>();
+        playerInputData.characterAnimator = GetComponent<Animator>();
+        playerInputData.playerController = this;
+        if (currentState == null)
+        {
+            ChangeState(idleState);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
+        if (currentState != null)
+        {
+            currentState.UpdateState(playerInputData);
+        }
     }
 
-    public void UpdatePlayerInput(PlayerInputData data)
+
+    public void ChangeState(StatesSO newState)
     {
-        playerInputData = data;
+        
+        if (currentState != null)
+        {
+            foreach (Transition transition in currentState.transitions)
+            {
+                if (transition.targetState == newState && transition.hasPriority)
+                {
+                    currentState.ExitState(playerInputData);
+                    currentState = newState;
+                    currentState.EnterState(playerInputData);
+                }
+            }
+           
+        }
+        else
+        {
+            currentState = newState;
+            currentState.EnterState(playerInputData);
+        }
+
+       
     }
 }
