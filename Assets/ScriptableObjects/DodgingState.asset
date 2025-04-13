@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fcae8972d33ed45b5e8d7af161eaad, type: 3}
   m_Name: DodgingState
   m_EditorClassIdentifier: 
-  transitions: []
+  lastStartTime: 0
+  lastEndTime: 0
+  cooldown: 2
+  dodging: 0
+  dodgeSpeed: 15

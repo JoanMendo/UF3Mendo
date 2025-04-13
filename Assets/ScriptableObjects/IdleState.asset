@@ -17,3 +17,5 @@ MonoBehaviour:
     hasPriority: 1
   - targetState: {fileID: 11400000, guid: c415a22358f2a1843aba671cad76383d, type: 2}
     hasPriority: 1
+  - targetState: {fileID: 11400000, guid: 5f460947d9385ec4a8bc4526dd5e4fb5, type: 2}
+    hasPriority: 1

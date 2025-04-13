@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc2a603ac4444c4fa9f052b4f5896af, type: 3}
   m_Name: JumpingState
   m_EditorClassIdentifier: 
-  transitions:
-  - targetState: {fileID: 11400000, guid: 528709bf8f1ec4e44822ca5dde9e0a81, type: 2}
-    hasPriority: 0
-  - targetState: {fileID: 11400000, guid: f1e6c930394deb945a569526175b7fa5, type: 2}
-    hasPriority: 0
+  lastStartTime: 0
+  lastEndTime: 0
+  cooldown: 0
+  jumpForce: 6
+  jumping: 0
+  grounded: 0

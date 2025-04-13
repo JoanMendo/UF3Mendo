@@ -9,26 +9,32 @@ public class IdleState : StatesSO
 {
     public override void EnterState(PlayerInputData playerData)
     {
-        playerData.characterAnimator.Play("Idle");
+        playerData.characterAnimator.SetBool("isIdle", true);
+        lastStartTime = Time.time;
     }
 
     public override void ExitState(PlayerInputData playerData)
     {
-
+        playerData.characterAnimator.SetBool("isIdle", false);
+        lastEndTime = Time.time;
     }
 
     public override void UpdateState(PlayerInputData playerData)
     {
 
-        //Comprovaciones para cambiar estado
-        if ( Time.time < 0.2f + playerData.lastTimeJumping && playerData.lastTimeJumping != 0f)
+        if (Time.time < 0.15f + playerData.lastTimeDodging && playerData.lastTimeDodging != 0f)
         {
-            playerData.playerController.ChangeState(playerData.playerController.jumpingState);
+            playerData.playerController.ChangeState(playerData.playerController.DodgingState);
+        }
+        else if (Time.time < 0.15f + playerData.lastTimeJumping && playerData.lastTimeJumping != 0f)
+        {
+
+            playerData.playerController.ChangeState(playerData.playerController.JumpingState);
         }
         else if (playerData.MoveInput != Vector2.zero)
         {
             
-            playerData.playerController.ChangeState(playerData.playerController.runningState);
+            playerData.playerController.ChangeState(playerData.playerController.RunningState);
         }
     }
 }

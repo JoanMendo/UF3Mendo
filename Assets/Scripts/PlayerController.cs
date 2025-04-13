@@ -4,28 +4,43 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-   
+    [Header("Current State")]
+
     [SerializeField] private StatesSO currentState;
+
+    [Header("State Assets")]
+    [SerializeField] private StatesSO idleStateAsset;
+    [SerializeField] private StatesSO runningStateAsset;
+    [SerializeField] private StatesSO jumpingStateAsset;
+    [SerializeField] private StatesSO dodgingStateAsset;
+    [SerializeField] private StatesSO dyingStateAsset;
+
+    [Header("Runtime States (Instantiated)")]
+    private StatesSO idleState;
+    private StatesSO runningState;
+    private StatesSO jumpingState;
+    private StatesSO dodgingState;
+    private StatesSO dyingState;
+
+
+
     public PlayerInputData playerInputData = new PlayerInputData();
 
-    [Header("States")]
-    [SerializeField] public StatesSO idleState;
-    [SerializeField] public StatesSO runningState;
-    [SerializeField] public StatesSO jumpingState;
-    [SerializeField] public StatesSO dodgingState;
-    [SerializeField] public StatesSO dyingState;
-
-
-    public void Awake()
+    void Awake()
     {
+        // Instanciar los estados
+        idleState = Instantiate(idleStateAsset);
+        runningState = Instantiate(runningStateAsset);
+        jumpingState = Instantiate(jumpingStateAsset);
+        dodgingState = Instantiate(dodgingStateAsset);
+        dyingState = Instantiate(dyingStateAsset);
 
-        playerInputData.characterController = GetComponent<CharacterController>();
+        // Setup inicial
+        playerInputData.characterRigidBody = GetComponent<Rigidbody>();
         playerInputData.characterAnimator = GetComponent<Animator>();
         playerInputData.playerController = this;
-        if (currentState == null)
-        {
-            ChangeState(idleState);
-        }
+
+        ChangeState(idleState); // O el que sea
     }
 
     public void Update()
@@ -37,28 +52,34 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void ChangeState(StatesSO newState)
+    public bool ChangeState(StatesSO newState)
     {
         
         if (currentState != null)
         {
-            foreach (Transition transition in currentState.transitions)
-            {
-                if (transition.targetState == newState && transition.hasPriority)
+           
+                if ( Time.time > newState.cooldown + newState.lastEndTime)
                 {
                     currentState.ExitState(playerInputData);
                     currentState = newState;
                     currentState.EnterState(playerInputData);
+                    return true;
                 }
-            }
-           
+            return false;
         }
+
         else
         {
             currentState = newState;
             currentState.EnterState(playerInputData);
+            return true;
         }
 
-       
     }
+
+    public StatesSO IdleState => idleState;
+    public StatesSO RunningState => runningState;
+    public StatesSO JumpingState => jumpingState;
+    public StatesSO DodgingState => dodgingState;
+    public StatesSO DyingState => dyingState;
 }

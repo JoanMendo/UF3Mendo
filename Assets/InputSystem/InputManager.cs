@@ -17,13 +17,13 @@ public class NewMonoBehaviourScript : MonoBehaviour, InputSystem_Actions.IPlayer
     void OnEnable() => inputActions.Enable();
     void OnDisable() => inputActions.Disable();
 
-    public void OnAttack(InputAction.CallbackContext context) => playerController.playerInputData.lastTimeAttacking = context.startTime;
-    public void OnCrouch(InputAction.CallbackContext context) => playerController.playerInputData.lastTimeDodging= context.startTime;
-    public void OnInteract(InputAction.CallbackContext context) => playerController.playerInputData.lastTimeInteracting = context.startTime;
-    public void OnJump(InputAction.CallbackContext context) => playerController.playerInputData.lastTimeJumping = context.startTime;
+    public void OnAttack(InputAction.CallbackContext context) => playerController.playerInputData.lastTimeAttacking = Time.time;
+    public void OnCrouch(InputAction.CallbackContext context) => playerController.playerInputData.lastTimeDodging= Time.time;
+    public void OnInteract(InputAction.CallbackContext context) => playerController.playerInputData.lastTimeInteracting = Time.time;
+    public void OnJump(InputAction.CallbackContext context) => playerController.playerInputData.lastTimeJumping = Time.time;
     public void OnLook(InputAction.CallbackContext context) => playerController.playerInputData.LookInput = context.ReadValue<Vector2>();
     public void OnMove(InputAction.CallbackContext context) => playerController.playerInputData.MoveInput = context.ReadValue<Vector2>();
-    public void OnSprint(InputAction.CallbackContext context) => playerController.playerInputData.lastTimeSprinting = context.startTime;
+    public void OnSprint(InputAction.CallbackContext context) => playerController.playerInputData.isSprinting = context.performed;
 
     public void OnPrevious(InputAction.CallbackContext context)
     {
