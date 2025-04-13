@@ -35,4 +35,8 @@ public class NewMonoBehaviourScript : MonoBehaviour, InputSystem_Actions.IPlayer
         throw new System.NotImplementedException();
     }
 
+    public void OnEmote(InputAction.CallbackContext context) => playerController.playerInputData.isEmoting = context.performed;
+
+
+
 }

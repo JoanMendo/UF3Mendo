@@ -16,6 +16,8 @@ public class IdleState : StatesSO
     public override void ExitState(PlayerInputData playerData)
     {
         playerData.characterAnimator.SetBool("isIdle", false);
+        playerData.characterAnimator.SetBool("isAFK", false);
+        playerData.characterAnimator.SetBool("isEmoting", false);
         lastEndTime = Time.time;
     }
 
@@ -36,5 +38,15 @@ public class IdleState : StatesSO
             
             playerData.playerController.ChangeState(playerData.playerController.RunningState);
         }
+        else if (playerData.isEmoting)
+        {
+            playerData.characterAnimator.SetBool("isEmoting", true);
+        }
+        else if(lastStartTime + 5 < Time.time )
+        {
+            playerData.characterAnimator.SetBool("isAFK", true);
+        }
+       
+
     }
 }
