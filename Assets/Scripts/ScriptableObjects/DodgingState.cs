@@ -38,7 +38,7 @@ public class DodgingState : StatesSO
         float newY = Mathf.Lerp(currentY, targetY, Time.deltaTime * 5f);
         playerData.characterAnimator.SetFloat("inputX", newX);
         playerData.characterAnimator.SetFloat("inputY", newY);
-       // playerData.characterRigidBody.rotation = Quaternion.Slerp(playerData.characterRigidBody.rotation, Quaternion.LookRotation(moveDirection), 0.03f);
+
         if (!dodging)
         {
 

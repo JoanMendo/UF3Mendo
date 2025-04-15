@@ -9,6 +9,9 @@ public class PlayerInputData
 
     public PlayerController playerController;
     public Vector2 MoveInput { get; set; }
+
+    public Vector3 MoveDirection { get; set; }
+
     public Vector2 LookInput { get; set; }
     public bool isSprinting { get; set; }
 

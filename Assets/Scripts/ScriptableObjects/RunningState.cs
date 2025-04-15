@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 [CreateAssetMenu(fileName = "RunningState", menuName = "ScriptableObjects/States/RunningState")]
 
@@ -37,6 +38,7 @@ public class RunningState : StatesSO
         float newY = Mathf.Lerp(currentY, targetY, Time.deltaTime * 5f);
         playerData.characterAnimator.SetFloat("inputX", newX);
         playerData.characterAnimator.SetFloat("inputY", newY);
+
         //Comprovaciones para cambiar estado
         if (Time.time <  playerData.lastTimeDodging + 0.15f && playerData.lastTimeDodging != 0)
         {
@@ -53,19 +55,19 @@ public class RunningState : StatesSO
         }
         if (changedState == false)
         {
-            Vector3 moveDirection = new Vector3(playerData.MoveInput.x, 0f, playerData.MoveInput.y);
+
             if (playerData.isSprinting)
             {
                 playerData.characterAnimator.SetBool("isRunning", true);
-                playerData.characterRigidBody.MovePosition(playerData.characterRigidBody.position + moveDirection * walkingSpeed * runningMultiplier * Time.deltaTime);
+                playerData.characterRigidBody.MovePosition(playerData.characterRigidBody.position + playerData.MoveDirection * walkingSpeed * runningMultiplier * Time.deltaTime);
             }
             else
             {
                 playerData.characterAnimator.SetBool("isRunning", false);
-                playerData.characterRigidBody.MovePosition(playerData.characterRigidBody.position + moveDirection * walkingSpeed  * Time.deltaTime);
+                playerData.characterRigidBody.MovePosition(playerData.characterRigidBody.position + playerData.MoveDirection * walkingSpeed  * Time.deltaTime);
             }
             
-            //playerData.characterRigidBody.rotation = Quaternion.Slerp(playerData.characterRigidBody.rotation, Quaternion.LookRotation(moveDirection), 0.01f);
+
         }
     }
 }
