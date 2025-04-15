@@ -29,10 +29,19 @@ public class DodgingState : StatesSO
     public override void UpdateState(PlayerInputData playerData)
     {
         Vector3 moveDirection = playerData.MoveInput == Vector2.zero ? playerData.characterRigidBody.transform.forward : new Vector3(playerData.MoveInput.x, 0, playerData.MoveInput.y);
-        playerData.characterRigidBody.rotation = Quaternion.Slerp(playerData.characterRigidBody.rotation, Quaternion.LookRotation(moveDirection), 0.03f);
+        //Esto para todas las direcciones del movimiento
+        float currentX = playerData.characterAnimator.GetFloat("inputX");
+        float currentY = playerData.characterAnimator.GetFloat("inputY");
+        float targetX = playerData.MoveInput.x;
+        float targetY = playerData.MoveInput.y;
+        float newX = Mathf.Lerp(currentX, targetX, Time.deltaTime * 5f);
+        float newY = Mathf.Lerp(currentY, targetY, Time.deltaTime * 5f);
+        playerData.characterAnimator.SetFloat("inputX", newX);
+        playerData.characterAnimator.SetFloat("inputY", newY);
+       // playerData.characterRigidBody.rotation = Quaternion.Slerp(playerData.characterRigidBody.rotation, Quaternion.LookRotation(moveDirection), 0.03f);
         if (!dodging)
         {
-           
+
             dodging = true;
             lastStartTime = Time.time;
             playerData.characterRigidBody.AddForce(moveDirection * dodgeSpeed, ForceMode.Impulse);

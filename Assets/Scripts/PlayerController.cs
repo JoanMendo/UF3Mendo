@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
         if (currentState != null)
         {
             currentState.UpdateState(playerInputData);
+            Debug.Log(playerInputData.MoveInput);
         }
     }
 

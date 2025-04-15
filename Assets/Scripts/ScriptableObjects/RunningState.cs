@@ -28,6 +28,15 @@ public class RunningState : StatesSO
 
     public override void UpdateState(PlayerInputData playerData)
     {
+        //Esto para todas las direcciones del movimiento
+        float currentX = playerData.characterAnimator.GetFloat("inputX");
+        float currentY = playerData.characterAnimator.GetFloat("inputY");
+        float targetX = playerData.MoveInput.x;
+        float targetY = playerData.MoveInput.y;
+        float newX = Mathf.Lerp(currentX, targetX, Time.deltaTime * 5f);
+        float newY = Mathf.Lerp(currentY, targetY, Time.deltaTime * 5f);
+        playerData.characterAnimator.SetFloat("inputX", newX);
+        playerData.characterAnimator.SetFloat("inputY", newY);
         //Comprovaciones para cambiar estado
         if (Time.time <  playerData.lastTimeDodging + 0.15f && playerData.lastTimeDodging != 0)
         {
@@ -56,7 +65,7 @@ public class RunningState : StatesSO
                 playerData.characterRigidBody.MovePosition(playerData.characterRigidBody.position + moveDirection * walkingSpeed  * Time.deltaTime);
             }
             
-            playerData.characterRigidBody.rotation = Quaternion.Slerp(playerData.characterRigidBody.rotation, Quaternion.LookRotation(moveDirection), 0.03f);
+            //playerData.characterRigidBody.rotation = Quaternion.Slerp(playerData.characterRigidBody.rotation, Quaternion.LookRotation(moveDirection), 0.01f);
         }
     }
 }
