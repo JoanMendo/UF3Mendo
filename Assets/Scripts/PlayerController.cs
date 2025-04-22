@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("State Assets")]
     [SerializeField] private StatesSO idleStateAsset;
+    [SerializeField] private StatesSO attackStateAsset;
     [SerializeField] private StatesSO runningStateAsset;
     [SerializeField] private StatesSO jumpingStateAsset;
     [SerializeField] private StatesSO dodgingStateAsset;
@@ -19,9 +20,10 @@ public class PlayerController : MonoBehaviour
     private StatesSO jumpingState;
     private StatesSO dodgingState;
     private StatesSO dyingState;
+    //private StatesSO attackState;
 
-    private float yaw = 0;
-    private float pitch = 0;
+    private float yaw = 0; // Movimiento horizontal de la cámara
+    private float pitch = 0; //Movimiento vertical de la cámara
 
     public PlayerInputData playerInputData = new PlayerInputData();
     public GameObject cameraPivot;
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
         jumpingState = Instantiate(jumpingStateAsset);
         dodgingState = Instantiate(dodgingStateAsset);
         dyingState = Instantiate(dyingStateAsset);
+        //attackState = Instantiate(attackStateAsset);
 
         playerInputData.characterRigidBody = GetComponent<Rigidbody>();
         playerInputData.characterAnimator = GetComponent<Animator>();
@@ -98,4 +101,6 @@ public class PlayerController : MonoBehaviour
     public StatesSO JumpingState => jumpingState;
     public StatesSO DodgingState => dodgingState;
     public StatesSO DyingState => dyingState;
+
+   // public StatesSO AttackState => attackState;
 }
