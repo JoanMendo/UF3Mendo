@@ -28,7 +28,7 @@ public class DodgingState : StatesSO
 
     public override void UpdateState(PlayerInputData playerData)
     {
-        Vector3 moveDirection = playerData.MoveInput == Vector2.zero ? playerData.characterRigidBody.transform.forward : new Vector3(playerData.MoveInput.x, 0, playerData.MoveInput.y);
+        Vector3 moveDirection = playerData.MoveInput == Vector2.zero ? playerData.characterRigidBody.transform.forward : playerData.MoveDirection;
         //Esto para todas las direcciones del movimiento
         float currentX = playerData.characterAnimator.GetFloat("inputX");
         float currentY = playerData.characterAnimator.GetFloat("inputY");

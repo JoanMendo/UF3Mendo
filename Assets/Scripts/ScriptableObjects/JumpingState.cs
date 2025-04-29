@@ -24,7 +24,7 @@ public class JumpingState : StatesSO
         playerData.characterAnimator.SetBool("isJumping", true);
         playerData.characterAnimator.SetBool("isGrounded", false);
         jumping = false;
-        direction = new Vector3(playerData.MoveInput.x, 0f, playerData.MoveInput.y);
+        direction = playerData.MoveDirection;
         isSprinting = playerData.isSprinting ? 1.3f : 1f;
         playerData.characterRigidBody.AddForce(direction * 3f , ForceMode.Impulse); // Add a small forward force to the jump so that it doesnt suddently move
 
@@ -46,7 +46,7 @@ public class JumpingState : StatesSO
             if (playerData.characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump_Start"))
             {
                 jumping = true;
-                direction = new Vector3(direction.x, Vector3.up.y, direction.y);
+                direction = new Vector3(direction.x, Vector3.up.y, direction.z);
                 lastStartTime = Time.time;
                 playerData.characterRigidBody.AddForce(direction * jumpForce *  isSprinting, ForceMode.Impulse);
                 playerData.characterRigidBody.linearDamping *= 0.3f; // Reduce the linear damping to make the jump more floaty

@@ -14,7 +14,7 @@ public class ChangeCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             ChangeCameraState();
         }
@@ -24,18 +24,20 @@ public class ChangeCamera : MonoBehaviour
     {
         if (isCameraActive)
         {
+            int layerIndex = LayerMask.NameToLayer("Default");
             cameraPivot.SetActive(false);
             foreach (GameObject obj in objectToDisable)
             {
-                obj.SetActive(true);
+                obj.layer = layerIndex;
             }
         }
         else
         {
+            int layerIndex = LayerMask.NameToLayer("TransparentFX");
             cameraPivot.SetActive(true);
             foreach (GameObject obj in objectToDisable)
             {
-                obj.SetActive(false);
+                obj.layer = layerIndex;
             }
         }
 

@@ -15,6 +15,6 @@ MonoBehaviour:
   lastStartTime: 0
   lastEndTime: 0
   cooldown: 0
-  jumpForce: 6
+  jumpForce: 5
   jumping: 0
   grounded: 0

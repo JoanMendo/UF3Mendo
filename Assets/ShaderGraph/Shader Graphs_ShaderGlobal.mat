@@ -38,11 +38,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _BOOLEAN: 0
-    - _ColorStep: 1.18
-    - _DepthStep: 1.31
+    - _ColorStep: 2.47
+    - _DepthStep: 1.23
     - _DepthStep2: 0
     - _Fullscreen_DepthWrite: 0
-    - _NormalStep: 2.58
+    - _NormalStep: 2.32
     - _OutlineWidth: 0.45
     m_Colors:
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
